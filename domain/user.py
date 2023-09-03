@@ -5,10 +5,17 @@ class User:
         self.username = username
         self.email = email
         self.password = password
-        self.id = uuid.uuid4()
+
 
     def get_username(self):
         return self.username
+
+
+    def set_uuid(self):
+        self.id = uuid.uuid4()
+
+    def set_id(self, id):
+        self.id = id
 
     def get_id(self):
         return self.id.__str__()

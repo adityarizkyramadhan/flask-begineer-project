@@ -17,11 +17,12 @@ class Usecase :
     def create(self, user : User):
         if not user.validate_not_empty():
             return False
+        user.change_password(util.hash_password(user.get_password()))
         return self.repository.create(user)
 
     def login(self, email, password):
         user = self.repository.get_by_email(email)
         if user :
-            if user.get_password() == password :
-                return True
+            if util.compare_password(password, user.get_password()) :
+                return user
         return False

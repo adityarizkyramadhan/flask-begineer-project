@@ -1,5 +1,8 @@
+from configuration.database import DatabaseConnection
+from domain.user import User
+
 class Repo :
-    def __init__(self, db) :
+    def __init__(self, db :DatabaseConnection) :
         self.db = db
 
     def get(self, id) :
@@ -9,7 +12,9 @@ class Repo :
             cursor.execute(query, (id,))
             result = cursor.fetchone()
             cursor.close()
-            return result
+            user = User(result[1], result[2], result[3])
+            user.set_id(result[0])
+            return user
         except Exception as err:
             print(err)
             return False
@@ -21,7 +26,12 @@ class Repo :
             cursor.execute(query)
             result = cursor.fetchall()
             cursor.close()
-            return result
+            users = []
+            for row in result:
+                user = User(row[1], row[2], row[3])
+                user.set_id(row[0])
+                users.append(user)
+            return users
         except Exception as err:
             print(err)
             return False
@@ -38,3 +48,16 @@ class Repo :
             print(err)
             return False
 
+    def get_by_email(self, email) :
+        try:
+            cursor = self.db.cursor()
+            query = "SELECT * FROM users WHERE email = %s"
+            cursor.execute(query, (email,))
+            result = cursor.fetchone()
+            cursor.close()
+            user = User(result[1], result[2], result[3])
+            user.set_id(result[0])
+            return user
+        except Exception as err:
+            print(err)
+            return False
