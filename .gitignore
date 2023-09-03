@@ -1,0 +1,40 @@
+.vscode
+.idea
+
+# File dan direktori yang diabaikan dalam proyek Python
+
+# Direktori virtual environment (contoh: venv, virtualenv, atau env)
+venv/
+
+# File yang dihasilkan oleh Python
+__pycache__/
+
+# Berkas byte kode Python
+*.pyc
+*.pyo
+__pycache__
+
+# Berkas debug dan log
+*.log
+*.swp
+*.swo
+*.swn
+*.swm
+*.bak
+
+# Berkas database SQLite (jika Anda menggunakannya)
+*.sqlite3
+
+# Direktori yang digunakan untuk menampung file build dan distribusi
+build/
+dist/
+
+# Berkas .env yang berisi konfigurasi yang sensitif (pastikan tidak ada yang terlewatkan)
+.env
+
+# Direktori cache
+.cache/
+
+# Berkas environment virtual environment (jika Anda menggunakan pipenv)
+Pipfile
+Pipfile.lock
