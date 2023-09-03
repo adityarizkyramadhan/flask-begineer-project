@@ -1,4 +1,4 @@
-from user.repo.mysql.user import Repo
+from infra.user.repo.mysql.user import Repo
 from domain.user import User
 import utils.util as util
 
@@ -16,7 +16,8 @@ class Usecase :
 
     def create(self, user : User):
         if not user.validate_not_empty():
-            return False
+            return None
+        user.set_uuid()
         user.change_password(util.hash_password(user.get_password()))
         return self.repository.create(user)
 
